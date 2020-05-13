@@ -71,7 +71,7 @@ function draw() {
       fill(255, 255, 255, transparencia);
       text(numero, width/2 + 20, height/2 + 40);
       if(transparencia < 255){
-        transparencia = transparencia + 0.5;
+        transparencia = transparencia + 2;
       }
       
     }
