@@ -9,7 +9,7 @@ var array = [];
 var frameAtual = 0;
 var segundo = 1;
 var blocoAtual = 1;
-var objetos = 1000;
+var objetos = 500;
 var blocosDeFloco = 10;
 var blocosNumero = parseInt(objetos/blocosDeFloco);
 var transparencia = 0;
@@ -70,10 +70,14 @@ function draw() {
     if(!array[blocoAtual * blocosDeFloco]){
       textSize(27);
       fill(255, 255, 255, transparencia);
-      text(numero, width/2 + 20, height/2 + 40);
       if(transparencia < 255){
         transparencia = transparencia + 2;
+      }else{
+        strokeWeight(4);
+        stroke(51);
       }
+      text(numero, width/2 + 20, height/2 + 40);
+      
       
     }
   }
