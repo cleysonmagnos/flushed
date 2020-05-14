@@ -19,9 +19,9 @@ let input, button, greeting;
 
 
 function preload() {
-  flocoDeNeve = loadImage('assets/neve.png');
+  flocoDeNeve = loadImage('assets/nevev2.png');
   logo = loadImage('assets/logo.jpg');
-  emote = loadImage('assets/emotepng.png');
+  emote = loadImage('assets/emotemelhor.png');
   nuvem = loadImage('assets/nuvem.png');
 }
 
