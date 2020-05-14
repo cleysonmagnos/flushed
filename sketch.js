@@ -66,8 +66,9 @@ function draw() {
       }
       
     }
+    criarNuvens();
     if(!array[blocoAtual * blocosDeFloco]){
-      textSize(30);
+      textSize(27);
       fill(255, 255, 255, transparencia);
       text(numero, width/2 + 20, height/2 + 40);
       if(transparencia < 255){
@@ -86,6 +87,13 @@ function CriarPlano(){
   noStroke();
   fill(10, 200, 230);
   rect(0, 0, width, 20);
+  
+  // ImagemTransparente();
+  image(emote, width/2, height/2, 112, 112);
+
+}
+
+function criarNuvens(){
   image(nuvem, 30, -40, 300, 159);
   image(nuvem, 300, -40, 300, 159);
   image(nuvem, 400, -40, 300, 159);
@@ -93,9 +101,6 @@ function CriarPlano(){
   image(nuvem, width, -40, 300, 159);
   image(nuvem, width - 300, -30, 300, 159);
   image(nuvem, width - 600, -50, 300, 159);
-  // ImagemTransparente();
-  image(emote, width/2, height/2, 112, 112);
-
 }
 
 function criarCaixa(){
