@@ -1,6 +1,4 @@
-let rectX = 0;
-let fr = 60; //starting FPS
-let clr;
+let fr = 60;
 var x = 50;
 var y = 50;
 var flocoDeNeve;
@@ -16,11 +14,9 @@ var objetos = 500;
 var blocosDeFloco = 10;
 var blocosNumero = parseInt(objetos/blocosDeFloco);
 var transparencia = 0;
-var imgTransparente;
 var inicio = false;
 var mostrarResultado = false;
 let input, button, greeting;
-
 
 function preload() {
   flocoDeNeve = loadImage('assets/nevev2.png');
@@ -31,19 +27,10 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight - 4);
-  // background(200);
-  // numero = parseInt(random(1, 3));
-  // console.log(numero);
-  
-  imgTransparente = createImage(200, 200);
-  // ImagemTransparente();
   imageMode(CENTER);
-  frameRate(fr); // Attempt to refresh at starting FPS
-  // clr = color(255, 0, 0);
+  frameRate(fr);
   criarPlano();
   criarCaixa();
-  
-
   for (let index = 0; index < objetos; index++) {
     if(index == array.length - 1){
       array[index] = new Floco(3);
@@ -58,8 +45,6 @@ function setup() {
     posicaoInicialNuvem = posicaoInicialNuvem + 150;
   }
   criarNuvens();
-  // console.log(array.length);
-  // console.log(blocosNumero);
 }
 
 function draw() {
@@ -69,7 +54,6 @@ function draw() {
     if(frameAtual == 10){
       frameAtual = 0;
       blocoAtual++;
-      // console.log(segundo);
     }
     criarPlano();
     for (var index = 0; index < blocoAtual * blocosDeFloco; index++) {
@@ -80,7 +64,6 @@ function draw() {
       
     }
     array[array.length - 1].verificarPosicao();
-
     criarNuvens();
     if(mostrarResultado){
       resultado();
