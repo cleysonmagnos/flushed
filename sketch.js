@@ -45,7 +45,12 @@ function setup() {
   
 
   for (let index = 0; index < objetos; index++) {
-    array[index] = new Floco();
+    if(index == array.length - 1){
+      array[index] = new Floco(3);
+    }else{
+      array[index] = new Floco(2);
+    }
+    
   }
 
   for (let index = 0; index < nuvens; index++) {
@@ -61,7 +66,7 @@ function draw() {
 
   if(inicio){
     frameAtual++;
-    if(frameAtual == 10 && segundo < blocosNumero){
+    if(frameAtual == 10){
       frameAtual = 0;
       blocoAtual++;
       // console.log(segundo);
@@ -147,11 +152,11 @@ function windowResized() {
 }
 
 class Floco {
-	constructor(){
+	constructor(velocidadeLimite){
     
     this.posiX = random(0, windowWidth);
     this.posiY = -60;
-    this.velocidadeY = random(1, 3);
+    this.velocidadeY = random(1, velocidadeLimite);
     this.aceleracao = 0.25;
     // this.velocidadeX = random(1, 5);
     this.asset = flocoDeNeve;
