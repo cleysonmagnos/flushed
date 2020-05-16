@@ -6,9 +6,12 @@ var y = 50;
 var flocoDeNeve;
 var numero = 0;
 var array = [];
+var arrayNuvens = [];
 var frameAtual = 0;
 var segundo = 1;
 var blocoAtual = 1;
+var nuvens = 15;
+var posicaoInicialNuvem = 100;
 var objetos = 500;
 var blocosDeFloco = 10;
 var blocosNumero = parseInt(objetos/blocosDeFloco);
@@ -31,6 +34,7 @@ function setup() {
   // background(200);
   // numero = parseInt(random(1, 3));
   // console.log(numero);
+  
   imgTransparente = createImage(200, 200);
   // ImagemTransparente();
   imageMode(CENTER);
@@ -38,11 +42,17 @@ function setup() {
   // clr = color(255, 0, 0);
   criarPlano();
   criarCaixa();
- 
+  
 
   for (let index = 0; index < objetos; index++) {
     array[index] = new Floco();
   }
+
+  for (let index = 0; index < nuvens; index++) {
+    arrayNuvens[index] = new Nuvem(posicaoInicialNuvem);
+    posicaoInicialNuvem = posicaoInicialNuvem + 150;
+  }
+  criarNuvens();
   // console.log(array.length);
   // console.log(blocosNumero);
 }
@@ -98,20 +108,20 @@ function criarPlano(){
 }
 
 function criarNuvens(){
-  image(nuvem, 30, -40, 300, 159);
-  image(nuvem, 300, -40, 300, 159);
-  image(nuvem, 400, -40, 300, 159);
-  image(nuvem, 900, -40, 300, 159);
-  image(nuvem, width, -40, 300, 159);
-  image(nuvem, width - 300, -30, 300, 159);
-  image(nuvem, width - 600, -50, 300, 159);
+  for (var index = 0; index < arrayNuvens.length; index++) {
+    if(arrayNuvens[index]){
+      arrayNuvens[index].atualizarPosicao();
+      arrayNuvens[index].carregarSprite();
+    }
+    
+  }
 }
 
 function criarCaixa(){
   input = createInput();
   input.position(20, 65);
 
-  button = createButton('Enviar');
+  button = createButton('Sortear');
   button.position(input.x + input.width, 65);
   button.mousePressed(iniciar);
 
@@ -161,6 +171,36 @@ class Floco {
 
   carregarSprite(){
     image(this.asset, this.posiX, this.posiY, 50, 50);
+  }
+
+}
+
+class Nuvem {
+	constructor(posicaoX = 300){
+    
+    this.posiX = posicaoX;
+    this.posiY = -40;
+    this.velocidadeX = random(-1, 1);
+    this.aceleracao = 0.25;
+    // this.velocidadeX = random(1, 5);
+    this.asset = nuvem;
+    this.limite = 60;
+    this.contadorLimite = 0;
+
+  }
+
+  atualizarPosicao(){
+    if(this.contadorLimite > this.limite){
+      this.contadorLimite = 0;
+      this.velocidadeX = random(-1, 1);
+    }
+    this.contadorLimite++;
+
+    this.posiX = this.posiX + this.velocidadeX;
+  }
+
+  carregarSprite(){
+    image(this.asset, this.posiX, this.posiY, 300, 159);
   }
 
 }
