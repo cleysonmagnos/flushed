@@ -15,6 +15,7 @@ var blocosNumero = parseInt(objetos/blocosDeFloco);
 var transparencia = 0;
 var imgTransparente;
 var inicio = false;
+var mostrarResultado = false;
 let input, button, greeting;
 
 
@@ -28,13 +29,14 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight - 4);
   // background(200);
-  
+  // numero = parseInt(random(1, 3));
+  // console.log(numero);
   imgTransparente = createImage(200, 200);
   // ImagemTransparente();
   imageMode(CENTER);
   frameRate(fr); // Attempt to refresh at starting FPS
   // clr = color(255, 0, 0);
-  CriarPlano();
+  criarPlano();
   criarCaixa();
  
 
@@ -46,19 +48,15 @@ function setup() {
 }
 
 function draw() {
-  
-  
-  // image(logo, 100, 100, 200, 200);
-  frameAtual++;
-  if(frameAtual == 10 && segundo < blocosNumero){
-    frameAtual = 0;
-    blocoAtual++;
-    // console.log(segundo);
-  }
-  // return '';
-  // tint(255, 255);
+
   if(inicio){
-    CriarPlano();
+    frameAtual++;
+    if(frameAtual == 10 && segundo < blocosNumero){
+      frameAtual = 0;
+      blocoAtual++;
+      // console.log(segundo);
+    }
+    criarPlano();
     for (var index = 0; index < blocoAtual * blocosDeFloco; index++) {
       if(array[index]){
         array[index].atualizarPosicao();
@@ -66,8 +64,16 @@ function draw() {
       }
       
     }
+    array[array.length - 1].verificarPosicao();
+
     criarNuvens();
-    if(!array[blocoAtual * blocosDeFloco]){
+    if(mostrarResultado){
+      resultado();
+    }
+  }
+}
+
+function resultado(){
       textSize(27);
       fill(255, 255, 255, transparencia);
       if(transparencia < 255){
@@ -77,15 +83,9 @@ function draw() {
         stroke(51);
       }
       text(numero, width/2 + 20, height/2 + 40);
-      
-      
-    }
-  }
-  
-
 }
 
-function CriarPlano(){
+function criarPlano(){
 
   background(0, 135, 214);
   noStroke();
@@ -124,7 +124,8 @@ function criarCaixa(){
 
 function iniciar(){
   var numeroInput = parseInt(input.value());
-  numero = parseInt(random(0, numeroInput));
+  numero = parseInt(random(1, numeroInput + 1));
+  // console.log(numero);
   input.remove();
   button.remove();
   inicio = true;
@@ -149,6 +150,13 @@ class Floco {
 
   atualizarPosicao(){
     this.posiY = this.posiY + this.velocidadeY + this.aceleracao;
+  }
+
+  verificarPosicao(){
+    this.posiY 
+    if(this.posiY > height){
+      mostrarResultado = true;
+    }
   }
 
   carregarSprite(){
